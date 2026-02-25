@@ -636,7 +636,24 @@
         const fotosCurtidas = new Set();
         let currentPhotoIndex = -1;
 
+        // Função de Tela Cheia multi-navegador
+        function ativarTelaCheia() {
+            const doc = document.documentElement;
+            if (doc.requestFullscreen) {
+                doc.requestFullscreen().catch(() => {});
+            } else if (doc.mozRequestFullScreen) { // Firefox
+                doc.mozRequestFullScreen().catch(() => {});
+            } else if (doc.webkitRequestFullscreen) { // Chrome, Safari e Opera
+                doc.webkitRequestFullscreen().catch(() => {});
+            } else if (doc.msRequestFullscreen) { // IE/Edge
+                doc.msRequestFullscreen().catch(() => {});
+            }
+        }
+
         function revelarSurpresa() {
+            // Tenta ativar a tela cheia assim que o usuário clica
+            ativarTelaCheia();
+
             const intro = document.getElementById('intro-screen');
             const main = document.getElementById('main-content');
             
