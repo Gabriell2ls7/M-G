@@ -598,18 +598,19 @@
     </div>
 
     <script>
+        // NOVAS IMAGENS ADICIONADAS AQUI
         const imageFiles = [
-            'https://i.ibb.co/GfcbSjm8/Whats-App-Image-2026-02-25-at-02-33-15-1.jpg',
-            'https://i.ibb.co/SXBVMgbC/Whats-App-Image-2026-02-25-at-02-33-15-2.jpg',
-            'https://i.ibb.co/TDgFc0vV/Whats-App-Image-2026-02-25-at-02-33-15.jpg',
-            'https://i.ibb.co/pv2nX3RG/Whats-App-Image-2026-02-25-at-02-33-16-1.jpg',
-            'https://i.ibb.co/qF5G6057/Whats-App-Image-2026-02-25-at-02-33-16-2.jpg',
-            'https://i.ibb.co/67qdF1J0/Whats-App-Image-2026-02-25-at-02-33-16-3.jpg',
-            'https://i.ibb.co/gFQBS3tk/Whats-App-Image-2026-02-25-at-02-33-16-4.jpg',
-            'https://i.ibb.co/WWM8sKmn/Whats-App-Image-2026-02-25-at-02-33-16-5.jpg',
-            'https://i.ibb.co/jZymtZp3/Whats-App-Image-2026-02-25-at-02-33-16.jpg',
-            'https://i.ibb.co/8DpX5rsz/Whats-App-Image-2026-02-25-at-02-33-17-1.jpg',
-            'https://i.ibb.co/fGTyZQpv/Whats-App-Image-2026-02-25-at-02-33-17.jpg'
+            'https://i.ibb.co/qLqrXZfG/Whats-App-Image-2026-02-25-at-02-33-15-1.jpg',
+            'https://i.ibb.co/jZk9YhMF/Whats-App-Image-2026-02-25-at-02-33-15-2.jpg',
+            'https://i.ibb.co/992HB4r4/Whats-App-Image-2026-02-25-at-02-33-15.jpg',
+            'https://i.ibb.co/N4RYb5X/Whats-App-Image-2026-02-25-at-02-33-16-1.jpg',
+            'https://i.ibb.co/bRNGBMnM/Whats-App-Image-2026-02-25-at-02-33-16-2.jpg',
+            'https://i.ibb.co/8LGcJb51/Whats-App-Image-2026-02-25-at-02-33-16-3.jpg',
+            'https://i.ibb.co/21JvpCxG/Whats-App-Image-2026-02-25-at-02-33-16-4.jpg',
+            'https://i.ibb.co/Q739d1P0/Whats-App-Image-2026-02-25-at-02-33-16-5.jpg',
+            'https://i.ibb.co/Wvfrw2xY/Whats-App-Image-2026-02-25-at-02-33-16.jpg',
+            'https://i.ibb.co/r2WsvWfz/Whats-App-Image-2026-02-25-at-02-33-17-1.jpg',
+            'https://i.ibb.co/My3Vh25W/Whats-App-Image-2026-02-25-at-02-33-17.jpg'
         ];
 
         const mensagensAmor = [
@@ -734,10 +735,8 @@
             modalImg.src = src;
             modalTexto.innerText = mensagem;
             
-            // Reseta a animação do coração grande caso esteja ativa de outra foto
             bigHeart.classList.remove('animate');
 
-            // Verifica a "memória" se essa foto já foi curtida antes
             if(fotosCurtidas.has(index)) {
                 smallHeart.classList.add('visible');
             } else {
@@ -749,7 +748,6 @@
         }
 
         function fecharFoto(event) {
-            // Fecha se clicar no fundo escuro ou no botão X
             if (event.target.id === 'modal-foto' || event.target.className.includes('btn-fechar')) {
                 const modal = document.getElementById('modal-foto');
                 modal.classList.remove('ativo');
@@ -761,29 +759,25 @@
             }
         }
 
-        // --- SISTEMA DE CURTIR COM DOIS TOQUES (Duplo Clique / Double Tap) ---
         const imgContainer = document.getElementById('img-container');
         let lastTapTime = 0;
 
-        // Para Celular (Touch)
         imgContainer.addEventListener('touchend', function(e) {
             const currentTime = new Date().getTime();
             const tapLength = currentTime - lastTapTime;
             
             if (tapLength < 300 && tapLength > 0) {
                 curtirFoto();
-                e.preventDefault(); // Evita dar zoom na tela do celular
+                e.preventDefault(); 
             }
             lastTapTime = currentTime;
         });
 
-        // Para Computador (Mouse Double Click)
         imgContainer.addEventListener('dblclick', function(e) {
             curtirFoto();
         });
 
         function curtirFoto() {
-            // Salva na memória que curtiu essa foto
             if(!fotosCurtidas.has(currentPhotoIndex)) {
                 fotosCurtidas.add(currentPhotoIndex);
             }
@@ -791,12 +785,10 @@
             const bigHeart = document.getElementById('big-heart');
             const smallHeart = document.getElementById('small-heart');
 
-            // Reinicia a animação de pular (caso ela clique várias vezes)
             bigHeart.classList.remove('animate');
-            void bigHeart.offsetWidth; // Força a re-renderização do CSS
+            void bigHeart.offsetWidth; 
             bigHeart.classList.add('animate');
 
-            // Depois que o coração grande some (aprox 800ms), o pequeno aparece brilhando no cantinho
             setTimeout(() => {
                 smallHeart.classList.add('visible');
             }, 800);
